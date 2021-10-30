@@ -1,5 +1,5 @@
 name = "edc_client"
-description = "Client library for the Embedded Dashboard Controller: https://github.com/hgrodriguez/embedded-dashboard-console"
+description = "Client library for: github.com/hgrodriguez/embedded-dashboard-console"
 version = "0.0.1"
 
 authors = ["Holger Rodriguez"]
