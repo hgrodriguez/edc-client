@@ -1,11 +1,9 @@
-name = "edc_client_example"
-description = "Shiny new project"
-version = "0.0.0"
+name = "edc_client"
+description = "Client library for the Embedded Dashboard Controller: https://github.com/hgrodriguez/embedded-dashboard-console"
+version = "0.0.1"
 
 authors = ["Holger Rodriguez"]
 maintainers = ["Holger Rodriguez <github@roseng.ch>"]
 maintainers-logins = ["hgrodriguez"]
-
-executables = ["edc_client_example"]
 [[depends-on]]  # Added by alr
-pico_bsp = "~0.6.0"  # Added by alr
+hal = "~0.1.0"  # Added by alr
