@@ -13,7 +13,7 @@ with Edc_Client.Matrix_Double_Word;
 
 with Transmitter.UART;
 
-procedure Edc_Client_Example is
+procedure Example_Pico is
    DELAY_IN_BETWEEN : constant Integer := 100;
 
    SHOW_LEDS        : constant Boolean := True;
@@ -139,8 +139,8 @@ begin
          Double_Word := Double_Word + 1;
       end if;
    end loop;
-end Edc_Client_Example;
 
+end Example_Pico;
 --===========================================================================
 --
 --               MAJOR TITLE HERE
