@@ -1,6 +1,8 @@
 with Interfaces;
 
-package body  Edc_Client.Matrix_Word is
+private with Edc_Client.Matrix.Common;
+
+package body  Edc_Client.Matrix.Word is
 
    --------------------------------------------------------------------------
    --  Keeps the status about the byte initialization of the package
@@ -23,34 +25,6 @@ package body  Edc_Client.Matrix_Word is
    Word_Transmitter    : Word_Transmit_Procedure;
 
    --------------------------------------------------------------------------
-   --  Returns the charactor for the nibble (= lower 4 bit value of a byte)
-   --------------------------------------------------------------------------
-   function Nibble_To_Char (Nibble : HAL.UInt8) return Character is
-      type N_2_C is array (HAL.UInt8 (0) .. HAL.UInt8 (15)) of Character;
-      N_2_C_Map : constant N_2_C := (
-                                     16#0# => '0',
-                                     16#1# => '1',
-                                     16#2# => '2',
-                                     16#3# => '3',
-                                     16#4# => '4',
-                                     16#5# => '5',
-                                     16#6# => '6',
-                                     16#7# => '7',
-                                     16#8# => '8',
-                                     16#9# => '9',
-                                     16#A# => 'A',
-                                     16#B# => 'B',
-                                     16#C# => 'C',
-                                     16#D# => 'D',
-                                     16#E# => 'E',
-                                     16#F# => 'F'
-                                    );
-
-   begin
-      return N_2_C_Map (Nibble);
-   end Nibble_To_Char;
-
-   --------------------------------------------------------------------------
    --  Shows/Displays the byte value given on the matrix display
    --     Value : value to be shown
    --     Block : block to use for showing the value
@@ -58,17 +32,17 @@ package body  Edc_Client.Matrix_Word is
    procedure Show_Byte (Value : HAL.UInt8; Block : Character) is
       use HAL;
       use Interfaces;
-      Command : Byte_String := "M0B000";
+      Command : Edc_Client.Matrix.Types.Byte_String := "M0B000";
       MSN     : Interfaces.Unsigned_8;
       LSN     : Interfaces.Unsigned_8;
    begin
       Command (4) := Block;
 
       MSN := Interfaces.Shift_Right (Interfaces.Unsigned_8 (Value), 4);
-      Command (5) := Nibble_To_Char (UInt8 (MSN));
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := Interfaces.Unsigned_8 (Value) and 16#F#;
-      Command (6) := Nibble_To_Char (UInt8 (LSN));
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
       Byte_Transmitter.all (Command);
    end Show_Byte;
 
@@ -127,18 +101,18 @@ package body  Edc_Client.Matrix_Word is
       LSN     : Interfaces.Unsigned_8;
    begin
       MSN := Interfaces.Shift_Right (MSB, 4);
-      Command (5) := Nibble_To_Char (UInt8 (MSN));
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := MSB and 16#F#;
-      Command (6) := Nibble_To_Char (UInt8 (LSN));
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       MSN := Interfaces.Shift_Right (LSB, 4);
-      Command (7) := Nibble_To_Char (UInt8 (MSN));
+      Command (7) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := LSB and 16#F#;
-      Command (8) := Nibble_To_Char (UInt8 (LSN));
+      Command (8) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       Word_Transmitter.all (Command);
    end Show_Word;
 
-end  Edc_Client.Matrix_Word;
+end  Edc_Client.Matrix.Word;

@@ -9,7 +9,7 @@ with ItsyBitsy;
 
 with Edc_Client;
 with Edc_Client.LED;
-with Edc_Client.Matrix_Word;
+with Edc_Client.Matrix.Word;
 with Edc_Client.Matrix_Double_Word;
 
 with Transmitter.UART;
@@ -50,10 +50,10 @@ begin
 
          Edc_Client.LED.Initialize (T => Transmitter.UART.Transmit_LED'Access);
 
-         Edc_Client.Matrix_Word.Byte_Initialize
+         Edc_Client.Matrix.Word.Byte_Initialize
            (T => Transmitter.UART.Transmit_Matrix_W_Byte'Access);
 
-         Edc_Client.Matrix_Word.Word_Initialize
+         Edc_Client.Matrix.Word.Word_Initialize
            (T => Transmitter.UART.Transmit_Matrix_W_Word'Access);
 
          Edc_Client.Matrix_Double_Word.Byte_Initialize
@@ -92,7 +92,7 @@ begin
 
       if SHOW_BYTES then
          --
-         Edc_Client.Matrix_Word.Show_LSB (LSB);
+         Edc_Client.Matrix.Word.Show_LSB (LSB);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          Edc_Client.Matrix_Double_Word.Show_LSW_LSB (LSB);
@@ -103,7 +103,7 @@ begin
                                       Ms   => DELAY_IN_BETWEEN);
          LSB := LSB + 1;
 
-         Edc_Client.Matrix_Word.Show_MSB (MSB);
+         Edc_Client.Matrix.Word.Show_MSB (MSB);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          if not SHOW_DOUBLE_WORD then
@@ -117,7 +117,7 @@ begin
          MSB := MSB - 1;
          --
       elsif SHOW_WORDS then
-         Edc_Client.Matrix_Word.Show_Word (Word);
+         Edc_Client.Matrix.Word.Show_Word (Word);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          if not SHOW_DOUBLE_WORD then

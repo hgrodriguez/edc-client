@@ -1,5 +1,5 @@
 with Edc_Client.LED;
-with Edc_Client.Matrix_Word;
+with Edc_Client.Matrix.Types;
 with Edc_Client.Matrix_Double_Word;
 
 package Transmitter.UART is
@@ -10,10 +10,10 @@ package Transmitter.UART is
 
    --
    procedure Transmit_Matrix_W_Byte
-     (Control : Edc_Client.Matrix_Word.Byte_String);
+     (Control : Edc_Client.Matrix.Types.Byte_String);
 
    procedure Transmit_Matrix_W_Word
-     (Control : Edc_Client.Matrix_Word.Word_String);
+     (Control : Edc_Client.Matrix.Types.Word_String);
 
    --
    procedure Transmit_Matrix_D_Byte

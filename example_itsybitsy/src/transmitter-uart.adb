@@ -44,7 +44,7 @@ package body Transmitter.UART is
    end Transmit_LED;
 
    procedure Transmit_Matrix_W_Byte
-     (Control : Edc_Client.Matrix_Word.Byte_String) is
+     (Control : Edc_Client.Matrix.Types.Byte_String) is
       Status        : HAL.UART.UART_Status;
       Control_Bytes : HAL.UART.UART_Data_8b (1 .. Control'Length);
       use HAL.UART;
@@ -61,7 +61,7 @@ package body Transmitter.UART is
    end Transmit_Matrix_W_Byte;
 
    procedure Transmit_Matrix_W_Word
-     (Control : Edc_Client.Matrix_Word.Word_String) is
+     (Control : Edc_Client.Matrix.Types.Word_String) is
       Status        : HAL.UART.UART_Status;
       Control_Bytes : HAL.UART.UART_Data_8b (1 .. Control'Length);
       use HAL.UART;
