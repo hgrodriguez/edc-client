@@ -2,36 +2,29 @@ with Interfaces;
 
 package body  Edc_Client.Matrix_Word is
 
+   --------------------------------------------------------------------------
+   --  Keeps the status about the byte initialization of the package
+   --------------------------------------------------------------------------
    Byte_Is_Initialized : Boolean := False;
 
-   function Byte_Initialized return Boolean is
-   begin
-      return Byte_Is_Initialized;
-   end Byte_Initialized;
-
+   --------------------------------------------------------------------------
+   --  Stores the call back procedure for the byte operation
+   --------------------------------------------------------------------------
    Byte_Transmitter : Byte_Transmit_Procedure;
 
-   procedure Byte_Initialize (T : Byte_Transmit_Procedure) is
-   begin
-      Byte_Transmitter := T;
-      Byte_Is_Initialized := True;
-   end Byte_Initialize;
-
+   --------------------------------------------------------------------------
+   --  Keeps the status about the word initialization of the package
+   --------------------------------------------------------------------------
    Word_Is_Initialized : Boolean := False;
 
-   function Word_Initialized return Boolean is
-   begin
-      return Word_Is_Initialized;
-   end Word_Initialized;
-
+   --------------------------------------------------------------------------
+   --  Stores the call back procedure for the word operation
+   --------------------------------------------------------------------------
    Word_Transmitter    : Word_Transmit_Procedure;
 
-   procedure Word_Initialize (T : Word_Transmit_Procedure) is
-   begin
-      Word_Transmitter := T;
-      Word_Is_Initialized := True;
-   end Word_Initialize;
-
+   --------------------------------------------------------------------------
+   --  Returns the charactor for the nibble (= lower 4 bit value of a byte)
+   --------------------------------------------------------------------------
    function Nibble_To_Char (Nibble : HAL.UInt8) return Character is
       type N_2_C is array (HAL.UInt8 (0) .. HAL.UInt8 (15)) of Character;
       N_2_C_Map : constant N_2_C := (
@@ -57,20 +50,11 @@ package body  Edc_Client.Matrix_Word is
       return N_2_C_Map (Nibble);
    end Nibble_To_Char;
 
-   procedure Show_Byte (Value : HAL.UInt8; Block : Character);
-
-   procedure Show_LSB (Value : HAL.UInt8) is
-   begin
-      Show_Byte (Value => Value,
-                 Block => '0');
-   end Show_LSB;
-
-   procedure Show_MSB (Value : HAL.UInt8) is
-   begin
-      Show_Byte (Value => Value,
-                 Block => '1');
-   end Show_MSB;
-
+   --------------------------------------------------------------------------
+   --  Shows/Displays the byte value given on the matrix display
+   --     Value : value to be shown
+   --     Block : block to use for showing the value
+   --------------------------------------------------------------------------
    procedure Show_Byte (Value : HAL.UInt8; Block : Character) is
       use HAL;
       use Interfaces;
@@ -87,6 +71,46 @@ package body  Edc_Client.Matrix_Word is
       Command (6) := Nibble_To_Char (UInt8 (LSN));
       Byte_Transmitter.all (Command);
    end Show_Byte;
+
+   --========================================================================
+   --
+   --  All procedures below are described in the corresponding .ads file
+   --
+   --========================================================================
+
+   procedure Byte_Initialize (T : Byte_Transmit_Procedure) is
+   begin
+      Byte_Transmitter := T;
+      Byte_Is_Initialized := True;
+   end Byte_Initialize;
+
+   function Byte_Initialized return Boolean is
+   begin
+      return Byte_Is_Initialized;
+   end Byte_Initialized;
+
+   function Word_Initialized return Boolean is
+   begin
+      return Word_Is_Initialized;
+   end Word_Initialized;
+
+   procedure Word_Initialize (T : Word_Transmit_Procedure) is
+   begin
+      Word_Transmitter := T;
+      Word_Is_Initialized := True;
+   end Word_Initialize;
+
+   procedure Show_LSB (Value : HAL.UInt8) is
+   begin
+      Show_Byte (Value => Value,
+                 Block => '0');
+   end Show_LSB;
+
+   procedure Show_MSB (Value : HAL.UInt8) is
+   begin
+      Show_Byte (Value => Value,
+                 Block => '1');
+   end Show_MSB;
 
    procedure Show_Word (Value : HAL.UInt16) is
       use HAL;

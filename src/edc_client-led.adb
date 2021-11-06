@@ -1,13 +1,45 @@
+--
+--  Copyright 2021 (C) Holger Rodriguez
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 package body Edc_Client.LED is
 
+   --------------------------------------------------------------------------
+   --  Keeps the status about initialization of the package
+   --------------------------------------------------------------------------
    Is_Initialized : Boolean := False;
+
+   --------------------------------------------------------------------------
+   --  Stores the call back procedure
+   --------------------------------------------------------------------------
+   Transmitter : Transmit_Procedure;
+
+   subtype LED_String_Block is String (1 .. 2);
+   BLOCK : constant LED_String_Block := "L0";
+
+   subtype LED_String_Specifier is String (1 .. 2);
+
+   procedure Transmit (Specifier : LED_String_Specifier) is
+      Command : LED_String;
+   begin
+      Command (1) := BLOCK (1);
+      Command (2) := BLOCK (2);
+      Command (3) := Specifier (1);
+      Command (4) := Specifier (2);
+      Transmitter.all (Command);
+   end Transmit;
+
+   --========================================================================
+   --
+   --  All procedures below are described in the corresponding .ads file
+   --
+   --========================================================================
 
    function Initialized return Boolean is
    begin
       return Is_Initialized;
    end Initialized;
-
-   Transmitter : Transmit_Procedure;
 
    procedure Initialize (T : Transmit_Procedure) is
    begin
@@ -16,93 +48,93 @@ package body Edc_Client.LED is
    end Initialize;
 
    procedure Red_On is
-      Command : constant LED_String := "L0R1";
+      Specifier : constant LED_String_Specifier := "R1";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Red_On;
 
    procedure Red_Off is
-      Command : constant LED_String := "L0R0";
+      Specifier : constant LED_String_Specifier := "R0";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Red_Off;
 
    procedure Red_Toggle is
-      Command : constant LED_String := "L0R2";
+      Specifier : constant LED_String_Specifier := "R2";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Red_Toggle;
 
    procedure Amber_On is
-      Command : constant LED_String := "L0A1";
+      Specifier : constant LED_String_Specifier := "A1";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Amber_On;
 
    procedure Amber_Off is
-      Command : constant LED_String := "L0A0";
+      Specifier : constant LED_String_Specifier := "A0";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Amber_Off;
 
    procedure Amber_Toggle is
-      Command : constant LED_String := "L0A2";
+      Specifier : constant LED_String_Specifier := "A2";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Amber_Toggle;
 
    procedure Green_On is
-      Command : constant LED_String := "L0G1";
+      Specifier : constant LED_String_Specifier := "G1";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Green_On;
 
    procedure Green_Off is
-      Command : constant LED_String := "L0G0";
+      Specifier : constant LED_String_Specifier := "G0";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Green_Off;
 
    procedure Green_Toggle is
-      Command : constant LED_String := "L0G2";
+      Specifier : constant LED_String_Specifier := "G2";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Green_Toggle;
 
    procedure White_On is
-      Command : constant LED_String := "L0W1";
+      Specifier : constant LED_String_Specifier := "W1";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end White_On;
 
    procedure White_Off is
-      Command : constant LED_String := "L0W0";
+      Specifier : constant LED_String_Specifier := "W0";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end White_Off;
 
    procedure White_Toggle is
-      Command : constant LED_String := "L0W2";
+      Specifier : constant LED_String_Specifier := "W2";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end White_Toggle;
 
    procedure Blue_On is
-      Command : constant LED_String := "L0B1";
+      Specifier : constant LED_String_Specifier := "B1";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Blue_On;
 
    procedure Blue_Off is
-      Command : constant LED_String := "L0B0";
+      Specifier : constant LED_String_Specifier := "B0";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Blue_Off;
 
    procedure Blue_Toggle is
-      Command : constant LED_String := "L0B2";
+      Specifier : constant LED_String_Specifier := "B2";
    begin
-      Transmitter.all (Command);
+      Transmit (Specifier);
    end Blue_Toggle;
 
 end Edc_Client.LED;
