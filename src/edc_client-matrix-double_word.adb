@@ -1,6 +1,8 @@
 with Interfaces;
 
-package body Edc_Client.Matrix_Double_Word is
+private with Edc_Client.Matrix.Common;
+
+package body Edc_Client.Matrix.Double_Word is
 
    --------------------------------------------------------------------------
    --  Keeps the status about the byte initialization of the package
@@ -33,34 +35,6 @@ package body Edc_Client.Matrix_Double_Word is
    Double_Word_Transmitter    : Double_Word_Transmit_Procedure;
 
    --------------------------------------------------------------------------
-   --  Returns the charactor for the nibble (= lower 4 bit value of a byte)
-   --------------------------------------------------------------------------
-   function Nibble_To_Char (Nibble : HAL.UInt8) return Character is
-      type N_2_C is array (HAL.UInt8 (0) .. HAL.UInt8 (15)) of Character;
-      N_2_C_Map : constant N_2_C := (
-                                     16#0# => '0',
-                                     16#1# => '1',
-                                     16#2# => '2',
-                                     16#3# => '3',
-                                     16#4# => '4',
-                                     16#5# => '5',
-                                     16#6# => '6',
-                                     16#7# => '7',
-                                     16#8# => '8',
-                                     16#9# => '9',
-                                     16#A# => 'A',
-                                     16#B# => 'B',
-                                     16#C# => 'C',
-                                     16#D# => 'D',
-                                     16#E# => 'E',
-                                     16#F# => 'F'
-                                    );
-
-   begin
-      return N_2_C_Map (Nibble);
-   end Nibble_To_Char;
-
-   --------------------------------------------------------------------------
    --  Shows/Displays the byte value given on the matrix display
    --     Value : value to be shown
    --     Block : block to use for showing the value
@@ -75,10 +49,10 @@ package body Edc_Client.Matrix_Double_Word is
       Command (4) := Block;
 
       MSN := Interfaces.Shift_Right (Interfaces.Unsigned_8 (Value), 4);
-      Command (5) := Nibble_To_Char (UInt8 (MSN));
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := Interfaces.Unsigned_8 (Value) and 16#F#;
-      Command (6) := Nibble_To_Char (UInt8 (LSN));
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
       Byte_Transmitter.all (Command);
    end Show_Byte;
 
@@ -104,16 +78,16 @@ package body Edc_Client.Matrix_Double_Word is
       Command (4) := Block;
 
       MSN := Interfaces.Shift_Right (MSB, 4);
-      Command (5) := Nibble_To_Char (UInt8 (MSN));
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := MSB and 16#F#;
-      Command (6) := Nibble_To_Char (UInt8 (LSN));
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       MSN := Interfaces.Shift_Right (LSB, 4);
-      Command (7) := Nibble_To_Char (UInt8 (MSN));
+      Command (7) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := LSB and 16#F#;
-      Command (8) := Nibble_To_Char (UInt8 (LSN));
+      Command (8) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       Word_Transmitter.all (Command);
    end Show_Word;
@@ -213,40 +187,40 @@ package body Edc_Client.Matrix_Double_Word is
       MSB :=
         Interfaces.Unsigned_8 (Interfaces.Shift_Right (MSW, 8));
       MSN := Interfaces.Shift_Right (MSB, 4);
-      Command (5) := Nibble_To_Char (UInt8 (MSN));
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := MSB and 16#F#;
-      Command (6) := Nibble_To_Char (UInt8 (LSN));
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       LSB :=
         Interfaces.Unsigned_8 (MSW and 16#FF#);
 
       MSN := Interfaces.Shift_Right (LSB, 4);
-      Command (7) := Nibble_To_Char (UInt8 (MSN));
+      Command (7) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := LSB and 16#F#;
-      Command (8) := Nibble_To_Char (UInt8 (LSN));
+      Command (8) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       --
       MSB :=
         Interfaces.Unsigned_8 (Interfaces.Shift_Right (LSW, 8));
       MSN := Interfaces.Shift_Right (MSB, 4);
-      Command (9) := Nibble_To_Char (UInt8 (MSN));
+      Command (9) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := MSB and 16#F#;
-      Command (10) := Nibble_To_Char (UInt8 (LSN));
+      Command (10) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       LSB :=
         Interfaces.Unsigned_8 (LSW and 16#FF#);
 
       MSN := Interfaces.Shift_Right (LSB, 4);
-      Command (11) := Nibble_To_Char (UInt8 (MSN));
+      Command (11) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
 
       LSN := LSB and 16#F#;
-      Command (12) := Nibble_To_Char (UInt8 (LSN));
+      Command (12) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
 
       --
       Double_Word_Transmitter.all (Command);
    end Show_Double_Word;
 
-end Edc_Client.Matrix_Double_Word;
+end Edc_Client.Matrix.Double_Word;

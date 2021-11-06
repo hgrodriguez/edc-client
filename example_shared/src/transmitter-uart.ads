@@ -1,6 +1,5 @@
 with Edc_Client.LED;
 with Edc_Client.Matrix.Types;
-with Edc_Client.Matrix_Double_Word;
 
 package Transmitter.UART is
 
@@ -17,12 +16,12 @@ package Transmitter.UART is
 
    --
    procedure Transmit_Matrix_D_Byte
-     (Control : Edc_Client.Matrix_Double_Word.Byte_String);
+     (Control : Edc_Client.Matrix.Types.Byte_String);
 
    procedure Transmit_Matrix_D_Word
-     (Control : Edc_Client.Matrix_Double_Word.Word_String);
+     (Control : Edc_Client.Matrix.Types.Word_String);
 
    procedure Transmit_Matrix_D_Double_Word
-     (Control : Edc_Client.Matrix_Double_Word.Double_Word_String);
+     (Control : Edc_Client.Matrix.Types.Double_Word_String);
 
 end Transmitter.UART;

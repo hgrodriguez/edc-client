@@ -13,20 +13,9 @@
 --
 with HAL;
 
-package Edc_Client.Matrix_Double_Word is
+with Edc_Client.Matrix.Types; use Edc_Client.Matrix.Types;
 
-   --------------------------------------------------------------------------
-   --  Command string for controlling the byte part of the display
-   --------------------------------------------------------------------------
-   type Byte_String is new String (1 .. 6);
-
-   --------------------------------------------------------------------------
-   --  This type defines the callback procedure, which needs to be
-   --  provided for the communication to the dashboard for the
-   --  Show_LSW/MSW+LSB/MSB procedures
-   --------------------------------------------------------------------------
-   type Byte_Transmit_Procedure is
-     access not null procedure (Control : Byte_String);
+package Edc_Client.Matrix.Double_Word is
 
    --------------------------------------------------------------------------
    --  Initializes the client and must be called before any other procedure
@@ -40,19 +29,6 @@ package Edc_Client.Matrix_Double_Word is
    function Byte_Initialized return Boolean;
 
    --------------------------------------------------------------------------
-   --  Command string for controlling the word part of the display
-   --------------------------------------------------------------------------
-   type Word_String is new String (1 .. 8);
-
-   --------------------------------------------------------------------------
-   --  This type defines the callback procedure, which needs to be
-   --  provided for the communication to the dashboard for the
-   --  Show_LSW/MSW procedures
-   --------------------------------------------------------------------------
-   type Word_Transmit_Procedure is
-     access not null procedure (Control : Word_String);
-
-   --------------------------------------------------------------------------
    --  Initializes the client and must be called before any other procedure
    --  in this package for any word related communication
    --------------------------------------------------------------------------
@@ -62,19 +38,6 @@ package Edc_Client.Matrix_Double_Word is
    --  Returns the status if the package has been initialized for word
    --------------------------------------------------------------------------
    function Word_Initialized return Boolean;
-
-   --------------------------------------------------------------------------
-   --  Command string for controlling the double word of the display
-   --------------------------------------------------------------------------
-   type Double_Word_String is new String (1 .. 12);
-
-   --------------------------------------------------------------------------
-   --  This type defines the callback procedure, which needs to be
-   --  provided for the communication to the dashboard for the
-   --  Show_LSW/MSW procedures
-   --------------------------------------------------------------------------
-   type Double_Word_Transmit_Procedure is
-     access not null procedure (Control : Double_Word_String);
 
    --------------------------------------------------------------------------
    --  Initializes the client and must be called before any other procedure
@@ -143,4 +106,4 @@ package Edc_Client.Matrix_Double_Word is
    procedure Show_Double_Word (Value : HAL.UInt32)
      with Pre => Double_Word_Initialized;
 
-end Edc_Client.Matrix_Double_Word;
+end Edc_Client.Matrix.Double_Word;

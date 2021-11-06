@@ -10,7 +10,7 @@ with ItsyBitsy;
 with Edc_Client;
 with Edc_Client.LED;
 with Edc_Client.Matrix.Word;
-with Edc_Client.Matrix_Double_Word;
+with Edc_Client.Matrix.Double_Word;
 
 with Transmitter.UART;
 
@@ -56,13 +56,13 @@ begin
          Edc_Client.Matrix.Word.Word_Initialize
            (T => Transmitter.UART.Transmit_Matrix_W_Word'Access);
 
-         Edc_Client.Matrix_Double_Word.Byte_Initialize
+         Edc_Client.Matrix.Double_Word.Byte_Initialize
            (T => Transmitter.UART.Transmit_Matrix_D_Byte'Access);
 
-         Edc_Client.Matrix_Double_Word.Word_Initialize
+         Edc_Client.Matrix.Double_Word.Word_Initialize
            (T => Transmitter.UART.Transmit_Matrix_D_Word'Access);
 
-         Edc_Client.Matrix_Double_Word.Double_Word_Initialize
+         Edc_Client.Matrix.Double_Word.Double_Word_Initialize
            (T => Transmitter.UART.Transmit_Matrix_D_Double_Word'Access);
 
    end case;
@@ -95,10 +95,10 @@ begin
          Edc_Client.Matrix.Word.Show_LSB (LSB);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
-         Edc_Client.Matrix_Double_Word.Show_LSW_LSB (LSB);
+         Edc_Client.Matrix.Double_Word.Show_LSW_LSB (LSB);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
-         Edc_Client.Matrix_Double_Word.Show_MSW_LSB (LSB);
+         Edc_Client.Matrix.Double_Word.Show_MSW_LSB (LSB);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          LSB := LSB + 1;
@@ -107,10 +107,10 @@ begin
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          if not SHOW_DOUBLE_WORD then
-            Edc_Client.Matrix_Double_Word.Show_LSW_MSB (MSB);
+            Edc_Client.Matrix.Double_Word.Show_LSW_MSB (MSB);
             RP.Timer.Delay_Milliseconds (This => My_Timer,
                                          Ms   => DELAY_IN_BETWEEN);
-            Edc_Client.Matrix_Double_Word.Show_MSW_MSB (MSB);
+            Edc_Client.Matrix.Double_Word.Show_MSW_MSB (MSB);
             RP.Timer.Delay_Milliseconds (This => My_Timer,
                                          Ms   => DELAY_IN_BETWEEN);
          end if;
@@ -121,17 +121,17 @@ begin
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          if not SHOW_DOUBLE_WORD then
-            Edc_Client.Matrix_Double_Word.Show_LSW (Word);
+            Edc_Client.Matrix.Double_Word.Show_LSW (Word);
             RP.Timer.Delay_Milliseconds (This => My_Timer,
                                          Ms   => DELAY_IN_BETWEEN);
-            Edc_Client.Matrix_Double_Word.Show_MSW (Word);
+            Edc_Client.Matrix.Double_Word.Show_MSW (Word);
             RP.Timer.Delay_Milliseconds (This => My_Timer,
                                          Ms   => DELAY_IN_BETWEEN);
          end if;
          Word := Word + 1;
       end if;
       if SHOW_DOUBLE_WORD then
-         Edc_Client.Matrix_Double_Word.Show_Double_Word (Double_Word);
+         Edc_Client.Matrix.Double_Word.Show_Double_Word (Double_Word);
          RP.Timer.Delay_Milliseconds (This => My_Timer,
                                       Ms   => DELAY_IN_BETWEEN);
          RP.Timer.Delay_Milliseconds (This => My_Timer,

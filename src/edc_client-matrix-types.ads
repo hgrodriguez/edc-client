@@ -25,4 +25,17 @@ package Edc_Client.Matrix.Types is
    type Word_Transmit_Procedure is
      access not null procedure (Control : Word_String);
 
+   --------------------------------------------------------------------------
+   --  Command string for controlling the double word of the display
+   --------------------------------------------------------------------------
+   type Double_Word_String is new String (1 .. 12);
+
+   --------------------------------------------------------------------------
+   --  This type defines the callback procedure, which needs to be
+   --  provided for the communication to the dashboard for the
+   --  Show_LSW/MSW procedures
+   --------------------------------------------------------------------------
+   type Double_Word_Transmit_Procedure is
+     access not null procedure (Control : Double_Word_String);
+
 end Edc_Client.Matrix.Types;
