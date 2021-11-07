@@ -1,3 +1,13 @@
+--===========================================================================
+--
+--  This package defines all types for the various Matrix packages.
+--
+--===========================================================================
+--
+--  Copyright 2021 (C) Holger Rodriguez
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 package Edc_Client.Matrix.Types is
 
    --------------------------------------------------------------------------

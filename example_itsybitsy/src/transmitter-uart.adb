@@ -1,3 +1,8 @@
+--
+--  Copyright 2021 (C) Holger Rodriguez
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 with HAL.GPIO;
 with HAL.UART;
 
@@ -10,10 +15,16 @@ with Edc_Client;
 
 package body Transmitter.UART is
 
+   --------------------------------------------------------------------------
+   --  Definitions of the UART ports to use for the communication.
+   --------------------------------------------------------------------------
    UART    : RP.UART.UART_Port renames ItsyBitsy.UART;
    UART_TX : RP.GPIO.GPIO_Point renames ItsyBitsy.TX;
    UART_RX : RP.GPIO.GPIO_Point renames ItsyBitsy.RX;
 
+   --------------------------------------------------------------------------
+   --  All procedures below are documented in the corresponding .ads file
+   --------------------------------------------------------------------------
    procedure Initialize is
    begin
       UART_TX.Configure (RP.GPIO.Output, RP.GPIO.Pull_Up, RP.GPIO.UART);

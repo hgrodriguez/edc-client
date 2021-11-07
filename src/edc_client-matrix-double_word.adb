@@ -1,3 +1,8 @@
+--
+--  Copyright 2021 (C) Holger Rodriguez
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 with Interfaces;
 
 private with Edc_Client.Matrix.Common;
