@@ -1,5 +1,5 @@
 name = "example_itsybitsy"
-description = "Example itsybitsy client project for the embedded-dashboard-console project"
+description = "Example itsybitsy client project for embedded-dashboard-console"
 version = "0.0.1"
 licenses = "BSD-3-Clause"
 
