@@ -1,10 +1,13 @@
 name = "example_pico"
-description = "Shiny new project"
-version = "0.0.0"
+description = "Example pico client project for the embedded-dashboard-console project"
+version = "0.0.1"
 
 authors = ["Holger Rodriguez"]
 maintainers = ["Holger Rodriguez <github@roseng.ch>"]
 maintainers-logins = ["hgrodriguez"]
+
+tags = ["embedded", "rp2040"]
+website = "https://github.com/hgrodriguez/edc-client"
 
 executables = ["example_pico"]
 [[depends-on]]  # Added by alr
