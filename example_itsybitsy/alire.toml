@@ -1,10 +1,13 @@
 name = "example_itsybitsy"
-description = "Shiny new project"
-version = "0.0.0"
+description = "Example itsybitsy client project for the embedded-dashboard-console project"
+version = "0.0.1"
+licenses = "BSD-3-Clause"
 
 authors = ["Holger Rodriguez"]
 maintainers = ["Holger Rodriguez <github@roseng.ch>"]
 maintainers-logins = ["hgrodriguez"]
+tags = ["embedded", "rp2040"]
+website = "https://github.com/hgrodriguez/edc-client"
 
 executables = ["example_itsybitsy"]
 [[depends-on]]  # Added by alr
