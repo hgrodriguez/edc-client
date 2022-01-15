@@ -1,6 +1,7 @@
 name = "example_pico"
 description = "Example pico client project for the embedded-dashboard-console project"
 version = "0.0.1"
+licenses = "BSD-3-Clause"
 
 authors = ["Holger Rodriguez"]
 maintainers = ["Holger Rodriguez <github@roseng.ch>"]
