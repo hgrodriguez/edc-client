@@ -1,17 +1,18 @@
-# edc-client
+# edc_client
 
-Implementation of a client to use the embedded dashboard console:
-https://github.com/hgrodriguez/embedded-dashboard-console
+Implementation of a client library to use the [embedded dashboard console](https://github.com/hgrodriguez/embedded-dashboard-console).
 
-The code for the client itself is platform agnostic and uses standard Ada 2012.
+There are [examples](https://github.com/hgrodriguez/edc_client_examples) available for Raspberry Pico and ItsyBitsy RP2040.
 
 ## Overall idea
-This should enable any platform to use the client library to connect to the dashboard.
+The code for the client itself is platform agnostic and uses standard Ada 2012 and only depends on [HAL](https://github.com/Fabien-Chouteau/hal).
+
+This should enable any embedded platform supported by HAL to use the client library to connect to the dashboard.
 
 ## Connection capabilities
 Currently the dashboard itself offers only UART connectivity.
-See the dashboard link above to follow the connectivity capabilities.
-As soon as the connectivity is extended in the dashboard, the examples here will be updated to ensure, that the communication is working.
+
+As soon as the connectivity is extended in the dashboard, this library will be updated to ensure, that the communication is working for any communication link offered by the [embedded dashboard console](https://github.com/hgrodriguez/embedded-dashboard-console).
 
 ##  Versioning scheme
 Major.Minor.Patch
@@ -31,7 +32,7 @@ Major.Minor.Patch
 
 3 = LEDs + Matrix 16-bit Word HEX Display + Matrix 32-bit DWord HEX Display; Status: **implemented**
 
-4 = LEDs + Matrix 16-bit Word HEX Display + Matrix 32-bit DWord HEX Display + Character Display
+4 = LEDs + Matrix 16-bit Word HEX Display + Matrix 32-bit DWord HEX Display + Character Display **implemented**
 
 5 = LEDs + Matrix 16-bit Word HEX Display + Matrix 32-bit DWord HEX Display + Character Display + Horizontal Scrolling Character Display
 
