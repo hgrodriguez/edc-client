@@ -13,24 +13,7 @@ package Edc_Client.LED is
    --------------------------------------------------------------------------
    --  Command string for controlling the LEDs
    --------------------------------------------------------------------------
-   type LED_String is new String (1 .. 4);
-
-   --------------------------------------------------------------------------
-   --  This type defines the callback procedure, which needs to be
-   --  provided for the communication to the dashboard
-   --------------------------------------------------------------------------
-   type Transmit_Procedure is access not null procedure (Control : LED_String);
-
-   --------------------------------------------------------------------------
-   --  Initializes the client and must be called before any other procedure
-   --  in this package
-   --------------------------------------------------------------------------
-   procedure Initialize (T : Transmit_Procedure);
-
-   --------------------------------------------------------------------------
-   --  Returns the status if the package has been initialized
-   --------------------------------------------------------------------------
-   function Initialized return Boolean;
+   subtype LED_String is String (1 .. 4);
 
    --------------------------------------------------------------------------
    --  Procedures to control the red LED

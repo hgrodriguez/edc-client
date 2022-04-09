@@ -1,8 +1,7 @@
 --===========================================================================
 --
---  This package is the interface to the Matrix Word part of the EDC Client
---  As a client of this package, you can chose, if you want to display
---  bytes independently or a word or a combination of both.
+--  This package is the interface for the Alpha part of the EDC Client
+--  for the second block (the block on the right)
 --
 --===========================================================================
 --
@@ -10,28 +9,28 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-with HAL;
-
-package Edc_Client.Matrix.Word is
+package Edc_Client.Alpha.Block2 is
 
    --------------------------------------------------------------------------
-   --  Shows the least significant byte on the matrix
-   --  This is equivalent of the right byte on the matrix
+   --  Shows a Single Letter
    --------------------------------------------------------------------------
-   procedure Show_LSB (Value : HAL.UInt8)
+   subtype Single_Letter_Positions is Integer range 1 .. 4;
+   procedure Show_Single_Letter (Position : Single_Letter_Positions;
+                                 Value    : Single_Letter_String)
      with Pre => Initialized;
 
    --------------------------------------------------------------------------
-   --  Shows the most significant byte on the matrix
-   --  This is equivalent of the left byte on the matrix
+   --  Shows Double Letters
    --------------------------------------------------------------------------
-   procedure Show_MSB (Value : HAL.UInt8)
+   subtype Double_Letters_Positions is Integer range 1 .. 2;
+   procedure Show_Double_Letters (Position : Double_Letters_Positions;
+                                  Value    : Double_Letters_String)
      with Pre => Initialized;
 
    --------------------------------------------------------------------------
-   --  Shows the full word on the matrix
+   --  Shows Four Letters
    --------------------------------------------------------------------------
-   procedure Show_Word (Value : HAL.UInt16)
+   procedure Show_Four_Letters (Value : Four_Letters_String)
      with Pre => Initialized;
 
-end  Edc_Client.Matrix.Word;
+end Edc_Client.Alpha.Block2;

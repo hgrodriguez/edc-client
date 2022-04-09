@@ -5,16 +5,6 @@
 --
 package body Edc_Client.LED is
 
-   --------------------------------------------------------------------------
-   --  Keeps the status about initialization of the package
-   --------------------------------------------------------------------------
-   Is_Initialized : Boolean := False;
-
-   --------------------------------------------------------------------------
-   --  Stores the call back procedure
-   --------------------------------------------------------------------------
-   Transmitter : Transmit_Procedure;
-
    subtype LED_String_Block is String (1 .. 2);
    BLOCK : constant LED_String_Block := "L0";
 
@@ -23,11 +13,9 @@ package body Edc_Client.LED is
    procedure Transmit (Specifier : LED_String_Specifier) is
       Command : LED_String;
    begin
-      Command (1) := BLOCK (1);
-      Command (2) := BLOCK (2);
-      Command (3) := Specifier (1);
-      Command (4) := Specifier (2);
-      Transmitter.all (Command);
+      Command (1 .. 2) := BLOCK (1 .. 2);
+      Command (3 .. 4) := Specifier (1 .. 2);
+      Transmitter (Command);
    end Transmit;
 
    --========================================================================
@@ -35,17 +23,6 @@ package body Edc_Client.LED is
    --  All procedures below are described in the corresponding .ads file
    --
    --========================================================================
-
-   function Initialized return Boolean is
-   begin
-      return Is_Initialized;
-   end Initialized;
-
-   procedure Initialize (T : Transmit_Procedure) is
-   begin
-      Transmitter := T;
-      Is_Initialized := True;
-   end Initialize;
 
    procedure Red_On is
       Specifier : constant LED_String_Specifier := "R1";

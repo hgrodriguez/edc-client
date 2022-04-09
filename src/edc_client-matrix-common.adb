@@ -3,6 +3,10 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
+with Interfaces;
+
+with Edc_Client.Matrix.Types; use Edc_Client.Matrix.Types;
+
 package body Edc_Client.Matrix.Common is
 
    --------------------------------------------------------------------------
@@ -32,5 +36,65 @@ package body Edc_Client.Matrix.Common is
    begin
       return N_2_C_Map (Nibble);
    end Nibble_To_Char;
+
+   --------------------------------------------------------------------------
+   --  see .ads
+   procedure Show_Byte (Value : HAL.UInt8;
+                        Side  : Character;
+                        Block : Character) is
+      use HAL;
+      use Interfaces;
+      Command : Byte_String := "MSB000";
+      MSN     : Interfaces.Unsigned_8;
+      LSN     : Interfaces.Unsigned_8;
+   begin
+      Command (2) := Side;
+
+      Command (4) := Block;
+
+      MSN := Interfaces.Shift_Right (Interfaces.Unsigned_8 (Value), 4);
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
+
+      LSN := Interfaces.Unsigned_8 (Value) and 16#F#;
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
+      Transmitter (Command);
+   end Show_Byte;
+
+   --------------------------------------------------------------------------
+   --  see .ads
+   procedure Show_Word (Value : HAL.UInt16;
+                        Side  : Character;
+                        Block : Character) is
+      use HAL;
+      use Interfaces;
+      Command : Word_String := "MSW00000";
+      MSB     : constant Interfaces.Unsigned_8 :=
+        Interfaces.Unsigned_8 (Interfaces.
+                                 Shift_Right (Interfaces.Unsigned_16 (Value),
+                                   8));
+      LSB     : constant Interfaces.Unsigned_8 :=
+        Interfaces.Unsigned_8 (Value and 16#FF#);
+
+      MSN     : Interfaces.Unsigned_8;
+      LSN     : Interfaces.Unsigned_8;
+   begin
+      Command (2) := Side;
+
+      Command (4) := Block;
+
+      MSN := Interfaces.Shift_Right (MSB, 4);
+      Command (5) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
+
+      LSN := MSB and 16#F#;
+      Command (6) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
+
+      MSN := Interfaces.Shift_Right (LSB, 4);
+      Command (7) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (MSN));
+
+      LSN := LSB and 16#F#;
+      Command (8) := Edc_Client.Matrix.Common.Nibble_To_Char (UInt8 (LSN));
+
+      Transmitter (Command);
+   end Show_Word;
 
 end Edc_Client.Matrix.Common;
