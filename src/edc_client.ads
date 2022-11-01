@@ -20,7 +20,14 @@ package Edc_Client is
    --  communication related procedures
    --------------------------------------------------------------------------
    type Transmit_Procedure is
-     access not null procedure (Control : String);
+     not null access procedure (Control : String);
+
+   --------------------------------------------------------------------------
+   --  This procedure offers a flexible way to use the library
+   --  but not sending anything out,
+   --  without changing code or configuration by doing nothing.
+   --------------------------------------------------------------------------
+   procedure Null_Transmitter (Control : String);
 
    --------------------------------------------------------------------------
    --  Initializes the client and must be called before any other procedure
@@ -37,7 +44,7 @@ private
    --------------------------------------------------------------------------
    --  Stores the call back procedure for any operation
    --------------------------------------------------------------------------
-   Client_Transmitter : Transmit_Procedure;
+   Client_Transmitter : Transmit_Procedure := Null_Transmitter'Access;
 
    --------------------------------------------------------------------------
    --  The intermediate transmitter procedure to ensure, that the

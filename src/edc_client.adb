@@ -12,6 +12,14 @@ package body Edc_Client is
 
    --------------------------------------------------------------------------
    --  see .ads
+   procedure Null_Transmitter (Control : String) is
+      pragma Unreferenced (Control);
+   begin
+      null;
+   end Null_Transmitter;
+
+   --------------------------------------------------------------------------
+   --  see .ads
    procedure Initialize (T : Transmit_Procedure) is
    begin
       Client_Transmitter := T;
