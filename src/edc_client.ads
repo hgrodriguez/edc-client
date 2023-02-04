@@ -33,7 +33,7 @@ package Edc_Client is
    --  Initializes the client and must be called before any other procedure
    --  in the EDC Client world for any communication
    --------------------------------------------------------------------------
-   procedure Initialize (T : Transmit_Procedure);
+   procedure Initialize (T : Transmit_Procedure := Null_Transmitter'Access);
 
    --------------------------------------------------------------------------
    --  Returns the status if the EDC Client has been initialized

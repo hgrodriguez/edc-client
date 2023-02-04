@@ -20,7 +20,7 @@ package body Edc_Client is
 
    --------------------------------------------------------------------------
    --  see .ads
-   procedure Initialize (T : Transmit_Procedure) is
+   procedure Initialize (T : Transmit_Procedure := Null_Transmitter'Access) is
    begin
       Client_Transmitter := T;
       Is_Initialized := True;

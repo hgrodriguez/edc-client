@@ -1,6 +1,6 @@
 name = "edc_client"
 description = "Client library for: github.com/hgrodriguez/embedded-dashboard-console"
-version = "1.5.0"
+version = "1.5.1"
 licenses = "BSD-3-Clause"
 
 authors = ["Holger Rodriguez"]
